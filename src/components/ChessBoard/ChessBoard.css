@@ -1,0 +1,19 @@
+#chessboard_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.btnRollDice {
+  display: flex;
+  padding: 20px;
+  text-align: center;
+  margin: 20px;
+  background-color: aqua;
+}
+
+.underline {
+  text-decoration: underline;
+}
