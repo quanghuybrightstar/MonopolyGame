@@ -3,6 +3,9 @@ import Phaser from "phaser";
 import { movePlayerWithSteps } from "../player/player";
 import ItemBase from "../../storage/Items";
 import { tweenAnims } from "../animation/tweenAnims";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
 
 export const rollDouble = (
   _this,
@@ -16,8 +19,8 @@ export const rollDouble = (
   _dice1.setVisible(true);
   _dice2.setVisible(true);
 
-  _dice1.setPosition((_chessboard.x * 2) / 3, _chessboard.y - 60);
-  _dice2.setPosition(_chessboard.x * 0.75, _chessboard.y - 100);
+  _dice1.setPosition((_chessboard.x * 2) / 3, widthScreen * 530);
+  _dice2.setPosition(_chessboard.x * 0.75, widthScreen * 490);
 
   let _steps2 = Phaser.Math.Between(1, 6);
 

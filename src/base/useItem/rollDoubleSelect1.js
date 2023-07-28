@@ -3,6 +3,10 @@ import Phaser from "phaser";
 import { movePlayerWithSteps } from "../player/player";
 import ItemBase from "../../storage/Items";
 import { tweenAnims } from "../animation/tweenAnims";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const rollDoubleSelect1 = (
   _this,
@@ -16,8 +20,8 @@ export const rollDoubleSelect1 = (
   _dice1.setVisible(true);
   _dice2.setVisible(true);
 
-  _dice1.setPosition((_chessboard.x * 2) / 3, _chessboard.y - 60);
-  _dice2.setPosition(_chessboard.x * 0.75, _chessboard.y - 100);
+  _dice1.setPosition((_chessboard.x * 2) / 3, widthScreen * 530);
+  _dice2.setPosition(_chessboard.x * 0.75, widthScreen * 490);
 
   let _steps1 = Phaser.Math.Between(1, 6);
   let _steps2 = Phaser.Math.Between(1, 6);
@@ -59,7 +63,7 @@ export const rollDoubleSelect1 = (
 
   _dice1.on("pointerup", () => {
     steps = _steps1;
-    _dice1.setScale(0.7);
+    _dice1.setScale(widthScreen * 0.7);
     console.log(steps);
     _this.input.enabled = false;
     setTimeout(() => {
@@ -67,9 +71,8 @@ export const rollDoubleSelect1 = (
     }, 500);
   });
   _dice2.on("pointerup", () => {
-    _dice2.setScale(0.7);
+    _dice2.setScale(widthScreen * 0.7);
     steps = _steps2;
-    console.log(steps);
     _this.input.enabled = false;
     setTimeout(() => {
       movePlayerWithSteps(_this, _chessboard, _player, steps, _dice2, _dice1);
@@ -82,10 +85,10 @@ export const rollDoubleSelect1 = (
     _chessboard.y * 1.27,
     "Chọn số ô muốn di chuyển",
     {
-      fontSize: "30px",
+      fontSize: `${smFontSize * 2.2}rem `,
       color: "#ffb366",
       stroke: "#ffb366",
-      strokeThickness: 2,
+      strokeThickness: widthScreen * 2,
       maxLines: 2,
       wordWrap: {
         width: _chessboard.x * 0.34,

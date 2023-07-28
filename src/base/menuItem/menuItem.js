@@ -4,6 +4,10 @@ import { TypeItem } from "../../constants/Items/typeItem";
 import ItemBase from "../../storage/Items";
 import { turn1Cell } from "../useItem";
 import { deleteItem } from "./deleteItem";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const createItem = (
   _this,
@@ -22,32 +26,35 @@ export const createItem = (
     _containerY * 0.96,
     "borderItem"
   );
+  borderItem.setDisplaySize(widthScreen * 583, widthScreen * 84);
 
   const imageItem = _this.add.image(
-    _containerX * 0.98,
+    _containerX * 0.92,
     _containerY * 0.96,
     _keyImage
   );
+  imageItem.setDisplaySize(widthScreen * 48, widthScreen * 44);
+
   let remainItemText = _this.add.text(
     _containerX * 1.19,
     _containerY * 0.96,
     `X${ItemBase.getCountItem(_type)}`,
     {
-      fontSize: "22px",
+      fontSize: `${smFontSize * 1.6}rem `,
       color: "#ffb366",
     }
   );
   remainItemText.setOrigin(0, 0.5);
 
   let itemDetail = _this.add.text(
-    _containerX * 1.4,
-    _containerY * 0.938,
+    _containerX * 1.45,
+    _containerY * 0.95,
     _itemDetail,
     {
-      fontSize: "18px",
+      fontSize: `${smFontSize * 1.3}rem `,
       maxLines: 2,
       wordWrap: {
-        width: 250,
+        width: widthScreen * 250,
         useAdvancedWrap: true,
       },
     }
@@ -55,10 +62,11 @@ export const createItem = (
   itemDetail.setOrigin(0, 0.5);
 
   let btnUseItem = _this.add.image(
-    _containerX * 3.07,
-    _containerY * 0.94,
+    _containerX * 3.1,
+    _containerY * 0.95,
     "btnUseItem"
   );
+  btnUseItem.setDisplaySize(widthScreen * 132, widthScreen * 49);
 
   btnUseItem.setInteractive({ useHandCursor: true });
   btnUseItem.on("pointerup", () => {

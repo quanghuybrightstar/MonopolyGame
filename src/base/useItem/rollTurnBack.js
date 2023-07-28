@@ -4,12 +4,16 @@ import { tweenAnims } from "../animation/tweenAnims";
 import { TypeItem } from "../../constants/Items/typeItem";
 import { Constants } from "../../constants/Constants";
 import { checkDirection } from "../player/checkDirection";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
   let isRolling = false;
 
   _dice.setVisible(true);
-  _dice.setPosition((_chessboard.x * 2) / 3, _chessboard.y - 60);
+  _dice.setPosition((_chessboard.x * 2) / 3, widthScreen * 530);
   if (!isRolling) {
     // Create the jump tween using the easing function
     tweenAnims(_this, _chessboard, _chessboard.x, _chessboard.y, _dice, () => {
@@ -69,13 +73,13 @@ export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
           stepCount = 0;
           const newX =
             0 * Constants.rectangleWidth +
-            (Constants.rectangleWidth * 3) / 2 +
-            (_chessboard.x - Math.floor(_chessboard.width / 2));
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
 
           const newY =
             5 * Constants.rectangleHeight +
-            Constants.rectangleHeight * 1.52 +
-            (_chessboard.y - Math.floor(_chessboard.height / 2));
+            widthScreen *
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
 
           _player.setPosition(newX, newY);
           ItemBase.updateContentAlertAction(
@@ -90,13 +94,13 @@ export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
           ItemBase.updateHistoryMovation(historyMovation);
           const newX =
             prevPosition.col * Constants.rectangleWidth +
-            (Constants.rectangleWidth * 3) / 2 +
-            (_chessboard.x - Math.floor(_chessboard.width / 2));
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
 
           const newY =
             prevPosition.row * Constants.rectangleHeight +
-            Constants.rectangleHeight * 1.52 +
-            (_chessboard.y - Math.floor(_chessboard.height / 2));
+            widthScreen *
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
 
           _player.setPosition(newX, newY);
         }

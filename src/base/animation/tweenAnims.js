@@ -1,4 +1,8 @@
 /* eslint-disable no-unused-vars */
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+
 export const tweenAnims = (
   _this,
   _chessboard,
@@ -8,7 +12,7 @@ export const tweenAnims = (
   _onComplete
 ) => {
   // Value for jumping animation
-  const jumpHeight = 50;
+  const jumpHeight = widthScreen * 50;
 
   const duration = 300;
 
@@ -22,15 +26,15 @@ export const tweenAnims = (
   _this.tweens.add({
     targets: _dice,
     x: controlX / 2,
-    y: controlY + 20,
+    y: controlY + widthScreen * 20,
     duration,
     rotation: Math.PI,
     ease: "Sine.easeInOut",
     onComplete: () => {
       _this.tweens.add({
         targets: _dice,
-        x: controlX / 2 + 80,
-        y: targetDiceY - 12,
+        x: controlX / 2 + widthScreen * 80,
+        y: targetDiceY - widthScreen * 12,
         duration: 250,
         rotation: (Math.PI * 6) / 5,
         ease: "Sine.easeInOut",
@@ -38,8 +42,8 @@ export const tweenAnims = (
           rollDice();
           _this.tweens.add({
             targets: _dice,
-            x: controlX / 2 + 130,
-            y: controlY + 5,
+            x: controlX / 2 + widthScreen * 130,
+            y: controlY + widthScreen * 5,
             duration: 200,
             ease: "Sine.easeInOut",
             onComplete: () => {

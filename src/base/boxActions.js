@@ -2,6 +2,10 @@
 import { listActions } from "../constants/Actions/listActions";
 import { IMG_BOX_CORNER, IMG_SIDE_EFFECT, IMG_BOX } from "../assets";
 import { Constants } from "../constants/Constants";
+import SmartBaseScreen from "./SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
   const actionItem = listActions[_row][_col];
@@ -25,13 +29,11 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         // Box Corner
         const boxCorner = _this.add.image(
           _x +
-            (Constants.rectangleWidth * 3) / 2 +
-            _chessboard.x -
-            Math.floor(_chessboard.width / 2),
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
           _y +
-            (Constants.rectangleHeight * 3) / 2 +
-            _chessboard.y -
-            Math.floor(_chessboard.height / 2),
+            widthScreen *
+              ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
           `boxCorner-${_row}-${_col}`
         );
         boxCorner.setDisplaySize(
@@ -44,13 +46,11 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         // Side Effect
         const sideEffect = _this.add.image(
           _x +
-            (Constants.rectangleWidth * 3) / 2 +
-            _chessboard.x -
-            Math.floor(_chessboard.width / 2),
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
           _y +
-            (Constants.rectangleHeight * 3) / 2 +
-            _chessboard.y -
-            Math.floor(_chessboard.height / 2),
+            widthScreen *
+              ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
           `sideEffect-${_row}-${_col}`
         );
         sideEffect.setDisplaySize(
@@ -62,13 +62,11 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         // Action
         const action = _this.add.image(
           _x +
-            (Constants.rectangleWidth * 3) / 2 +
-            _chessboard.x -
-            Math.floor(_chessboard.width / 2),
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
           _y +
-            (Constants.rectangleHeight * 3) / 2 +
-            _chessboard.y -
-            Math.floor(_chessboard.height / 2),
+            widthScreen *
+              ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
           `action-${_row}-${_col}`
         );
 
@@ -88,13 +86,11 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         // Box
         const box = _this.add.image(
           _x +
-            (Constants.rectangleWidth * 3) / 2 +
-            _chessboard.x -
-            Math.floor(_chessboard.width / 2),
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
           _y +
-            (Constants.rectangleHeight * 3) / 2 +
-            _chessboard.y -
-            Math.floor(_chessboard.height / 2),
+            widthScreen *
+              ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
           `box-${_row}-${_col}`
         );
         box.setDisplaySize(Constants.rectangleWidth, Constants.rectangleHeight);
@@ -104,13 +100,11 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         // Side Effect
         const sideEffect = _this.add.image(
           _x +
-            (Constants.rectangleWidth * 3) / 2 +
-            _chessboard.x -
-            Math.floor(_chessboard.width / 2),
+            widthScreen *
+              ((Constants.rectangleWidth * 1.6) / widthScreen + 790),
           _y +
-            (Constants.rectangleHeight * 3) / 2 +
-            _chessboard.y -
-            Math.floor(_chessboard.height / 2),
+            widthScreen *
+              ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
           `sideEffect-${_row}-${_col}`
         );
         sideEffect.setDisplaySize(
@@ -123,30 +117,31 @@ export const boxActions = (_this, _x, _y, _row, _col, _chessboard) => {
         if (_row === actionItem?.row && _col === actionItem?.col) {
           const action = _this.add.image(
             _x +
-              Constants.rectangleWidth * 1.6 +
-              _chessboard.x -
-              Math.floor(_chessboard.width / 2),
+              widthScreen *
+                ((Constants.rectangleWidth * 1.65) / widthScreen + 790),
             _y +
-              (Constants.rectangleHeight * 3) / 2 +
-              _chessboard.y -
-              Math.floor(_chessboard.height / 2),
+              widthScreen *
+                ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105),
             `action-${_row}-${_col}`
+          );
+
+          action.setDisplaySize(
+            Constants.rectangleWidth * 0.35,
+            Constants.rectangleHeight * 0.4
           );
 
           // action.setDisplaySize(Constants.rectangleWidth / 3, Constants.rectangleHeight / 2);
 
           const titleAction = _this.add.text(
             _x +
-              Constants.rectangleWidth * 1.26 +
-              _chessboard.x -
-              Math.floor(_chessboard.width / 2),
+              widthScreen *
+                ((Constants.rectangleWidth * 1.26) / widthScreen + 790),
             _y +
-              Constants.rectangleHeight * 1.54 +
-              _chessboard.y -
-              Math.floor(_chessboard.height / 2),
+              widthScreen *
+                ((Constants.rectangleHeight * 1.54) / widthScreen + 105),
             actionItem.title,
             {
-              fontSize: "26px",
+              fontSize: `${smFontSize * 1.9}rem `,
               align: "center",
             }
           );

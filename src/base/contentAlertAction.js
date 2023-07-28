@@ -1,4 +1,8 @@
 /* eslint-disable no-unused-vars */
+import SmartBaseScreen from "./SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const contentAlertItem = (
   _this,
@@ -8,24 +12,24 @@ export const contentAlertItem = (
 ) => {
   // Text alert action
   const textAlertAction = _this.add.text(
-    _graphicChessboard.x * 0.93,
-    _graphicChessboard.y * 0.1,
+    widthScreen * 1246.2,
+    widthScreen * 56,
     _contentAlertAction,
     {
-      fontSize: "30px",
+      fontSize: `${smFontSize * 2.2}rem `,
       stroke: "#fff",
-      strokeThickness: 3,
+      strokeThickness: widthScreen * 3,
       shadow: {
-        offsetX: 3,
-        offsetY: 3,
+        offsetX: widthScreen * 3,
+        offsetY: widthScreen * 3,
         color: "#dd3a08",
-        blur: 3,
+        blur: widthScreen * 3,
         stroke: true,
         fill: true,
       },
       maxLines: 2,
       wordWrap: {
-        width: _graphicChessboard.x * 0.5,
+        width: widthScreen * 670,
         useAdvancedWrap: true,
       },
       align: "center",
@@ -35,8 +39,8 @@ export const contentAlertItem = (
 
   // Image item alert
   const imgItemAlert = _this.add.image(
-    _graphicChessboard.x * 0.93 + textAlertAction.width * 0.9,
-    _graphicChessboard.y * 0.1,
+    widthScreen * 1248,
+    widthScreen * 56,
     _imgKey
   );
 

@@ -3,11 +3,14 @@ import Phaser from "phaser";
 import { movePlayerWithSteps } from "./player/player";
 import ItemBase from "../storage/Items";
 import { tweenAnims } from "./animation/tweenAnims";
+import SmartBaseScreen from "./SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
 
 export const rollNoItem = (_this, _chessboard, _player, _dice1, _steps) => {
   let isRolling = false;
   _dice1.setVisible(true);
-  _dice1.setPosition((_chessboard.x * 2) / 3, _chessboard.y - 60);
+  _dice1.setPosition((_chessboard.x * 2) / 3, widthScreen * 530);
   if (!isRolling) {
     // Create the jump tween using the easing function
     tweenAnims(_this, _chessboard, _chessboard.x, _chessboard.y, _dice1, () => {

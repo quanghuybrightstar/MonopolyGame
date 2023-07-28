@@ -20,7 +20,7 @@ export const getItemBoxPosition = (
   const actionItem = listActions[_row][_col];
   const listItems = ItemBase.listItems;
   let text = "";
-  actionItem.count >= 0
+  actionItem?.count >= 0
     ? (text = `Chúc mừng! Bạn được cộng`)
     : (text = `Rất tiếc! Bạn bị trừ`);
   switch (actionItem.type) {

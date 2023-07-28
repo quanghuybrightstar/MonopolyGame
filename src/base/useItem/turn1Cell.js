@@ -5,6 +5,10 @@ import { getItemBoxPosition } from "../getItemBox/getItemBoxPosition";
 import { Constants } from "../../constants/Constants";
 import { checkDirection } from "../player/checkDirection";
 import { deleteItem } from "../menuItem/deleteItem";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const turn1Cell = (_this, _chessboard, _player, _dice1, _dice2) => {
   const historyMovation = ItemBase.historyMovation;
@@ -40,13 +44,11 @@ export const turn1Cell = (_this, _chessboard, _player, _dice1, _dice2) => {
     setTimeout(() => {
       const newX =
         prevPosition.col * Constants.rectangleWidth +
-        (Constants.rectangleWidth * 3) / 2 +
-        (_chessboard.x - Math.floor(_chessboard.width / 2));
+        widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
 
       const newY =
         prevPosition.row * Constants.rectangleHeight +
-        Constants.rectangleHeight * 1.52 +
-        (_chessboard.y - Math.floor(_chessboard.height / 2));
+        widthScreen * ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
 
       _player.setPosition(newX, newY);
 

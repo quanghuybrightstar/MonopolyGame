@@ -1,28 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 export const getItemBoxText = (_this, _chessboard, _imageKey, _detailItem) => {
   const containerText = _this.add.container();
-  containerText.setPosition(_chessboard.x * 0.85, _chessboard.y * 0.7);
+  containerText.setPosition(_chessboard.x * 0.87, _chessboard.y * 0.7);
   const textCongrats = _this.add.text(
-    containerText.x * 0.96,
+    containerText.x * 1,
     containerText.y * 0.9,
     "Chúc mừng! Bạn đã nhận một vật phẩm.",
     {
-      fontSize: "30px",
+      fontSize: `${smFontSize * 2.2}rem `,
       stroke: "#fff",
-      strokeThickness: 3,
+      strokeThickness: widthScreen * 3,
       shadow: {
-        offsetX: 3,
-        offsetY: 3,
+        offsetX: widthScreen * 3,
+        offsetY: widthScreen * 3,
         color: "#0017e6",
-        blur: 3,
+        blur: widthScreen * 3,
         stroke: true,
         fill: true,
       },
       maxLines: 2,
       wordWrap: {
-        width: containerText.x * 0.5,
+        width: containerText.x * 0.45,
         useAdvancedWrap: true,
       },
       align: "center",
@@ -34,7 +38,7 @@ export const getItemBoxText = (_this, _chessboard, _imageKey, _detailItem) => {
     containerText.y * 1.28,
     _imageKey
   );
-  itemImg.setDisplaySize(260, 260);
+  itemImg.setDisplaySize(widthScreen * 260, widthScreen * 260);
   itemImg.setOrigin(0.2, 0.25);
   itemImg.setDepth(1);
 
@@ -43,7 +47,7 @@ export const getItemBoxText = (_this, _chessboard, _imageKey, _detailItem) => {
     containerText.y * 1.8,
     _detailItem,
     {
-      fontSize: "30px",
+      fontSize: `${smFontSize * 2.1}rem `,
       color: "#ffb366",
       stroke: "#ffb366",
       strokeThickness: 2,

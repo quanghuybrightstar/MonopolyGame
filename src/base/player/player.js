@@ -4,6 +4,10 @@ import ItemBase from "../../storage/Items";
 import { TypeItem } from "../../constants/Items/typeItem";
 import { getItemBoxPosition } from "../getItemBox/getItemBoxPosition";
 import { Constants } from "../../constants/Constants";
+import SmartBaseScreen from "../SmartScreenBase";
+SmartBaseScreen.baseSetUp();
+const widthScreen = SmartBaseScreen.smBaseWidth;
+const smFontSize = SmartBaseScreen.smFontSize;
 
 let canMove = false;
 let typeMove = "right";
@@ -22,11 +26,9 @@ export const createPlayer = (_this, _player, _chessboard) => {
 
   _player.setPosition(
     playerPosition.col * Constants.rectangleWidth +
-      (Constants.rectangleWidth * 3) / 2 +
-      (_chessboard.x - Math.floor(_chessboard.width / 2)),
+      widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
     playerPosition.row * Constants.rectangleHeight +
-      Constants.rectangleHeight * 1.52 +
-      (_chessboard.y - Math.floor(_chessboard.height / 2))
+      widthScreen * ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105)
   );
 
   _player.setDepth(1);
@@ -43,15 +45,21 @@ export const movePlayerWithSteps = (
   let stepCount = 0;
   const moveInterval = setInterval(() => {
     _direction = ItemBase.directionMove;
-    const currentRow = Math.floor(
-      (_player.y - (_chessboard.y - Math.floor(_chessboard.height / 2)) - 100) /
+    const currentRow = Math.round(
+      (_player.y -
+        widthScreen *
+          ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105)) /
         Constants.rectangleHeight
     );
 
-    const currentCol = Math.floor(
-      (_player.x - (_chessboard.x - Math.floor(_chessboard.width / 2)) - 150) /
+    const currentCol = Math.round(
+      (_player.x -
+        widthScreen *
+          ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790)) /
         Constants.rectangleWidth
     );
+
+    console.log(currentRow + "_" + currentCol);
 
     const newRow = currentRow + _direction?.row;
     const newCol = currentCol + _direction?.col;
@@ -143,15 +151,17 @@ export const movePlayerWithSteps = (
             col: newColAfterMoved,
           });
 
+          console.log(newRowAfterMoved + "_" + newColAfterMoved);
+
           const newX =
             newColAfterMoved * Constants.rectangleWidth +
-            (Constants.rectangleWidth * 3) / 2 +
-            (_chessboard.x - Math.floor(_chessboard.width / 2));
+            widthScreen *
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
 
           const newY =
             newRowAfterMoved * Constants.rectangleHeight +
-            Constants.rectangleHeight * 1.52 +
-            (_chessboard.y - Math.floor(_chessboard.height / 2));
+            widthScreen *
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
 
           _player.setPosition(newX, newY);
         }
