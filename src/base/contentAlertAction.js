@@ -13,10 +13,10 @@ export const contentAlertItem = (
   // Text alert action
   const textAlertAction = _this.add.text(
     widthScreen * 1246.2,
-    widthScreen * 56,
+    widthScreen * 46,
     _contentAlertAction,
     {
-      fontSize: `${smFontSize * 2.2}rem `,
+      fontSize: `${smFontSize * 35.2}px `,
       stroke: "#fff",
       strokeThickness: widthScreen * 3,
       shadow: {
@@ -39,9 +39,9 @@ export const contentAlertItem = (
 
   // Image item alert
   const imgItemAlert = _this.add.image(
-    widthScreen * 1248,
-    widthScreen * 56,
-    _imgKey
+    widthScreen * 1680,
+    widthScreen * 46,
+    _imgKey + "_bg"
   );
 
   return {

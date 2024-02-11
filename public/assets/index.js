@@ -12,7 +12,6 @@ export { default as IMG_ROLL_DICE } from "./imgs/rollDice.png";
 export { default as IMG_PLAYER } from "./imgs/player.png";
 export { default as IMG_BLOCKS } from "./imgs/block.png";
 export { default as IMG_FRAME_BOARD } from "./imgs/frameBoard.png";
-export { default as IMG_BOXS } from "./imgs/boxs.png";
 export { default as IMG_KNIFE_LEFT } from "./imgs/knifeLeft.png";
 export { default as IMG_KNIFE_RIGHT } from "./imgs/knifeRight.png";
 export { default as IMG_BOX } from "./imgs/box.png";

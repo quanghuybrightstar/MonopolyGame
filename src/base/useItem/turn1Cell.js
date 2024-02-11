@@ -31,7 +31,7 @@ export const turn1Cell = (_this, _chessboard, _player, _dice1, _dice2) => {
     ItemBase.updateIsUsingItem(true);
     deleteItem(ItemBase.listItems, TypeItem.TURN_1_CELL);
     ItemBase.updateContentAlertAction("Bạn đã sử dụng vật phẩm ");
-    ItemBase.updateImgKeyItem("turn1CellItemBg");
+    ItemBase.updateImgKeyItem(TypeItem.TURN_1_CELL + "_bg");
     prevPosition = {
       row: historyMovation[historyMovationLength - 1]?.row,
       col: historyMovation[historyMovationLength - 1]?.col,
@@ -44,11 +44,11 @@ export const turn1Cell = (_this, _chessboard, _player, _dice1, _dice2) => {
     setTimeout(() => {
       const newX =
         prevPosition.col * Constants.rectangleWidth +
-        widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
+        widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760);
 
       const newY =
         prevPosition.row * Constants.rectangleHeight +
-        widthScreen * ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
+        widthScreen * ((Constants.rectangleHeight * 1.52) / widthScreen + 25);
 
       _player.setPosition(newX, newY);
 
@@ -67,6 +67,8 @@ export const turn1Cell = (_this, _chessboard, _player, _dice1, _dice2) => {
       ItemBase.updateIsUsingItem(false);
       ItemBase.updateIsDeletedItem(false);
       ItemBase.updateIsBtnSelected(false);
+      ItemBase.updateImgKeyItem("");
+      ItemBase.updateContentAlertAction("");
     }, 500);
   }
 };

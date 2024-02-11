@@ -2,19 +2,17 @@
 
 import { TypeAction } from "./typeAction";
 
-import {
-  IMG_ITEM_BOX_ACTION,
-  IMG_HOME_ACTION,
-  IMG_DIAMOND_ACTION,
-  IMG_TICKET_ACTION,
-  IMG_GIFT_ACTION,
-} from "../../assets";
+import { IMG_ITEM_BOX_ACTION } from "../../../public/assets";
+import { IMG_HOME_ACTION } from "../../../public/assets";
+import { IMG_DIAMOND_ACTION } from "../../../public/assets";
+import { IMG_GIFT_ACTION } from "../../../public/assets";
+
 const boxSize = 6;
 
 export const listActions = [
   [
     {
-      image: IMG_ITEM_BOX_ACTION,
+      image: "assets/imgs/itemBox.png",
       type: TypeAction.ITEM_BOX,
       count: null,
       row: 0,
@@ -22,7 +20,7 @@ export const listActions = [
       title: null,
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -1,
       row: 0,
@@ -30,7 +28,7 @@ export const listActions = [
       title: "-1",
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +2,
       row: 0,
@@ -38,7 +36,7 @@ export const listActions = [
       title: "+2",
     },
     {
-      image: IMG_TICKET_ACTION,
+      image: "assets/imgs/ticketAction.png",
       type: TypeAction.TICKET,
       count: +1,
       row: 0,
@@ -46,7 +44,7 @@ export const listActions = [
       title: "+1",
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -1,
       row: 0,
@@ -54,7 +52,7 @@ export const listActions = [
       title: "-1",
     },
     {
-      image: IMG_GIFT_ACTION,
+      image: "assets/imgs/gift.png",
       type: "GIFT",
       count: null,
       row: 0,
@@ -64,7 +62,7 @@ export const listActions = [
   ],
   [
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +2,
       row: 1,
@@ -77,7 +75,7 @@ export const listActions = [
 
     {},
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -2,
       row: 1,
@@ -87,7 +85,7 @@ export const listActions = [
   ],
   [
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -1,
       row: 2,
@@ -100,7 +98,7 @@ export const listActions = [
 
     {},
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -1,
       row: 2,
@@ -110,7 +108,7 @@ export const listActions = [
   ],
   [
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +5,
       row: 3,
@@ -123,7 +121,7 @@ export const listActions = [
 
     {},
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +4,
       row: 3,
@@ -133,7 +131,7 @@ export const listActions = [
   ],
   [
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -3,
       row: 4,
@@ -146,7 +144,7 @@ export const listActions = [
 
     {},
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +1,
       row: 4,
@@ -156,7 +154,7 @@ export const listActions = [
   ],
   [
     {
-      image: IMG_HOME_ACTION,
+      image: "assets/imgs/home.png",
       type: "HOME",
       count: null,
       row: boxSize - 1,
@@ -164,7 +162,7 @@ export const listActions = [
       title: null,
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +1,
       row: boxSize - 1,
@@ -172,7 +170,7 @@ export const listActions = [
       title: "+1",
     },
     {
-      image: IMG_TICKET_ACTION,
+      image: "assets/imgs/ticketAction.png",
       type: TypeAction.TICKET,
       count: +1,
       row: boxSize - 1,
@@ -180,7 +178,7 @@ export const listActions = [
       title: "+1",
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: -1,
       row: boxSize - 1,
@@ -188,7 +186,7 @@ export const listActions = [
       title: "-1",
     },
     {
-      image: IMG_DIAMOND_ACTION,
+      image: "assets/imgs/diamondGreen.png",
       type: TypeAction.DIAMOND,
       count: +2,
       row: boxSize - 1,
@@ -196,7 +194,7 @@ export const listActions = [
       title: "+2",
     },
     {
-      image: IMG_ITEM_BOX_ACTION,
+      image: "assets/imgs/itemBox.png",
       type: TypeAction.ITEM_BOX,
       count: null,
       row: boxSize - 1,

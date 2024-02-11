@@ -2,8 +2,18 @@
 /* eslint-disable no-unused-vars */
 import ItemBase from "../../storage/Items";
 import { Constants } from "../../constants/Constants";
+import updateQuantityItem from "../UpdateQuantityItem";
 
 export const checkDirection = (_row, _col) => {
+  const platformSelected = ItemBase.platformSelected;
+  const detailItemTicket = ItemBase.detailItem.filter(
+    (item) => item.item_category == "ticket"
+  );
+
+  const item_result = ItemBase.detailItem.filter(
+    (item) => item.item_category != "ticket"
+  );
+
   const positionPlayer = _row + "_" + _col;
   switch (positionPlayer) {
     // position top left
@@ -34,6 +44,21 @@ export const checkDirection = (_row, _col) => {
         col: 1,
       });
       ItemBase.increaseCountTickets(1);
+
+      detailItemTicket[0] = {
+        ...detailItemTicket[0],
+        quantity_available: ItemBase.countTickets + 1,
+      };
+      item_result.push(detailItemTicket[0]);
+      ItemBase.updateDetailItem(item_result);
+      const body = {
+        platform_id: platformSelected.id,
+        platform_category: platformSelected.type,
+        item_result: JSON.stringify(item_result),
+        type: "playing",
+      };
+      const result = updateQuantityItem(body);
+
       break;
     default:
   }

@@ -5,6 +5,8 @@ import { TypeItem } from "../../constants/Items/typeItem";
 import { getItemBoxPosition } from "../getItemBox/getItemBoxPosition";
 import { Constants } from "../../constants/Constants";
 import SmartBaseScreen from "../SmartScreenBase";
+import updateQuantityItem from "../UpdateQuantityItem";
+
 SmartBaseScreen.baseSetUp();
 const widthScreen = SmartBaseScreen.smBaseWidth;
 const smFontSize = SmartBaseScreen.smFontSize;
@@ -26,9 +28,9 @@ export const createPlayer = (_this, _player, _chessboard) => {
 
   _player.setPosition(
     playerPosition.col * Constants.rectangleWidth +
-      widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790),
+      widthScreen * ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760),
     playerPosition.row * Constants.rectangleHeight +
-      widthScreen * ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105)
+      widthScreen * ((Constants.rectangleHeight * 3) / 2 / widthScreen + 25)
   );
 
   _player.setDepth(1);
@@ -43,19 +45,28 @@ export const movePlayerWithSteps = (
   _dice2
 ) => {
   let stepCount = 0;
+  const platformSelected = ItemBase.platformSelected;
+  const detailItemTicket = ItemBase.detailItem.filter(
+    (item) => item.item_category == "ticket"
+  );
+
+  const item_result = ItemBase.detailItem.filter(
+    (item) => item.item_category != "ticket"
+  );
+
   const moveInterval = setInterval(() => {
     _direction = ItemBase.directionMove;
     const currentRow = Math.round(
       (_player.y -
         widthScreen *
-          ((Constants.rectangleHeight * 3) / 2 / widthScreen + 105)) /
+          ((Constants.rectangleHeight * 3) / 2 / widthScreen + 25)) /
         Constants.rectangleHeight
     );
 
     const currentCol = Math.round(
       (_player.x -
         widthScreen *
-          ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790)) /
+          ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760)) /
         Constants.rectangleWidth
     );
 
@@ -104,6 +115,7 @@ export const movePlayerWithSteps = (
           let newColAfterMoved = currentCol + _direction?.col;
 
           const positionPlayer = newRowAfterMoved + "_" + newColAfterMoved;
+
           switch (positionPlayer) {
             // position top left
             case "0_0":
@@ -137,6 +149,22 @@ export const movePlayerWithSteps = (
               });
               typeMove = "right";
               ItemBase.increaseCountTickets(1);
+              detailItemTicket[0] = {
+                ...detailItemTicket[0],
+                quantity_available: ItemBase.countTickets + 1,
+              };
+              item_result.push(detailItemTicket[0]);
+              ItemBase.updateDetailItem(item_result);
+
+              const body = {
+                platform_id: platformSelected.id,
+                platform_category: platformSelected.type,
+                item_result: JSON.stringify(item_result),
+                type: "playing",
+              };
+
+              const result = updateQuantityItem(body);
+
               break;
             default:
           }
@@ -156,12 +184,12 @@ export const movePlayerWithSteps = (
           const newX =
             newColAfterMoved * Constants.rectangleWidth +
             widthScreen *
-              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760);
 
           const newY =
             newRowAfterMoved * Constants.rectangleHeight +
             widthScreen *
-              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 25);
 
           _player.setPosition(newX, newY);
         }

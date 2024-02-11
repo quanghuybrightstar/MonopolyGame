@@ -1,7 +1,7 @@
 export const TypeItem = {
-  ROLL_DOUBLE: "ROLL_DOUBLE",
-  TURN_1_CELL: "TURN_1_CELL",
-  X2_DIAMOND: "X2_DIAMOND",
-  ROLL_TURN_BACK: "ROLL_TURN_BACK",
-  ROLL_DOUBLE_SELECT_1: "ROLL_DOUBLE_SELECT_1",
+  ROLL_DOUBLE: "roll_double",
+  TURN_1_CELL: "turn_one_cell",
+  X2_DIAMOND: "double_diamond",
+  ROLL_TURN_BACK: "roll_turn_back",
+  ROLL_DOUBLE_SELECT_1: "roll_double_select_one",
 };

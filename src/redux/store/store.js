@@ -1,9 +1,12 @@
-/* eslint-disable no-unused-vars */
-import Constants from "../constants/constants";
-import rootReducer from "../reducers/reducers";
-import { legacy_createStore as createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import ReduxPersist from "../../configs/ReducerPersist";
+import rootReducer from "../reducers/reducers";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const persistedReducer = persistReducer(ReduxPersist.storeConfig, rootReducer);
+const store = createStore(persistedReducer, applyMiddleware(thunk));
 
-export { store };
+const persistor = persistStore(store);
+
+export { store, persistor };

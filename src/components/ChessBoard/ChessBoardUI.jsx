@@ -22,13 +22,25 @@ import {
 import { Constants } from "../../constants/Constants";
 import { contentAlertItem } from "../../base/contentAlertAction";
 import SmartBaseScreen from "../../base/SmartScreenBase";
+import { chessBoardLogic } from "./ChessBoardUI.logic";
+import { useSelector } from "react-redux";
+import APIBase from "../../base/APIBase";
+
 SmartBaseScreen.baseSetUp();
 const widthScreen = SmartBaseScreen.smBaseWidth;
 const smFontSize = SmartBaseScreen.smFontSize;
 
-const ChessBoardUI = () => {
+const ChessBoardUI = (props) => {
   let steps = 0;
   const playerTextureKey = "player";
+
+  const { dataChessBoard, dataItemCurrent } = chessBoardLogic(props);
+
+  const diamondQuantity = useSelector(
+    (state) => state?.quantity_diamond?.quantity_available
+  );
+
+  console.log(APIBase.access_token);
 
   useEffect(() => {
     let graphicChessboard;
@@ -67,13 +79,20 @@ const ChessBoardUI = () => {
     const config = {
       type: Phaser.AUTO,
       parent: "chessboardui_container",
-      width: widthScreen * 1895,
-      height: widthScreen * 1080,
+      resolution: 720 * 1280,
+      // width: widthScreen * 1895,
+      // height: widthScreen * 982,
       physics: {
         default: "arcade",
         arcade: {
           debug: false,
         },
+      },
+      scale: {
+        mode: Phaser.Scale.FIT,
+        parent: "chessboardui_container",
+        width: widthScreen * 1895,
+        height: widthScreen * 982,
       },
       input: {
         activePointers: 1,
@@ -99,16 +118,15 @@ const ChessBoardUI = () => {
           createAnimation(this);
 
           // Background Image
+
           const backgroundImage = this.add.sprite(0, 0, "background");
-          backgroundImage.setDisplaySize(
-            widthScreen * 1895,
-            widthScreen * 1080
-          );
+          backgroundImage.setDisplaySize(widthScreen * 1895, widthScreen * 982);
+          console.log(backgroundImage);
           backgroundImage.setOrigin(0);
           // CONTAINER CHESSBOARD
           graphicChessboard = this.add.container();
           graphicChessboard.x = widthScreen * 1340;
-          graphicChessboard.y = widthScreen * 560;
+          graphicChessboard.y = widthScreen * 520;
 
           // Content alert
           const contentAlert = contentAlertItem(
@@ -123,10 +141,10 @@ const ChessBoardUI = () => {
           // Chessboard
           chessboard = this.add.image(
             graphicChessboard.x,
-            widthScreen * 590,
+            widthScreen * 525,
             "frameBoard"
           );
-          chessboard.setDisplaySize(widthScreen * 1100, widthScreen * 970);
+          chessboard.setDisplaySize(widthScreen * 1050, widthScreen * 890);
           // Create Player
           player = this.add.image(0, 0, playerTextureKey);
           createPlayer(this, player, chessboard);
@@ -158,7 +176,7 @@ const ChessBoardUI = () => {
           // Header
           const headerImg = this.add.image(
             widthScreen * 500,
-            widthScreen * 100,
+            widthScreen * 60,
             "header"
           );
 
@@ -171,12 +189,12 @@ const ChessBoardUI = () => {
           );
 
           graphicsMenuItems.x = widthScreen * 460;
-          graphicsMenuItems.y = widthScreen * 560;
+          graphicsMenuItems.y = widthScreen * 520;
 
           // Menu Items
           const menuItemsImg = this.add.image(
             widthScreen * 460,
-            widthScreen * 560,
+            widthScreen * 520,
             "menuItems"
           );
           menuItemsImg.setDisplaySize(widthScreen * 735, widthScreen * 880);
@@ -187,25 +205,25 @@ const ChessBoardUI = () => {
           const ticketsImg = this.add.image(0, 0, "tickets");
 
           containerHeaderItem.x = widthScreen * 230;
-          containerHeaderItem.y = (widthScreen * 737) / 3;
+          containerHeaderItem.y = (widthScreen * 580) / 3;
           ticketsImg.setPosition(containerHeaderItem.x, containerHeaderItem.y);
           ticketsImg.setDisplaySize(widthScreen * 96, widthScreen * 103);
 
           const labelNumberTickets = this.add.text(
             widthScreen * 294,
-            widthScreen * 215,
+            widthScreen * 160,
             "Bạn còn",
             {
-              fontSize: `${smFontSize * 2}rem `,
+              fontSize: `${smFontSize * 28.8}px `,
             }
           );
 
           remainTickets = this.add.text(
-            widthScreen * 450,
-            widthScreen * 215,
-            `${countTicketsSide} vé`,
+            widthScreen * 430,
+            widthScreen * 160,
+            `${countTicketsSide != undefined ? countTicketsSide : 0} vé`,
             {
-              fontSize: `${smFontSize * 2}rem`,
+              fontSize: `${smFontSize * 28.8}px`,
               align: "center",
             }
           );
@@ -215,17 +233,23 @@ const ChessBoardUI = () => {
           const underline = this.add.graphics();
           underline.lineStyle(widthScreen * 2, 0xffffff);
           underline.beginPath();
-          underline.moveTo(widthScreen * 450, widthScreen * 245);
-          underline.lineTo(widthScreen * 548, widthScreen * 245);
+          underline.moveTo(
+            remainTickets.x,
+            widthScreen * 165 + remainTickets.height
+          );
+          underline.lineTo(
+            remainTickets.x + remainTickets.width,
+            widthScreen * 165 + remainTickets.height
+          );
           underline.closePath();
           underline.strokePath();
 
           const textMoreTickets = this.add.text(
             labelNumberTickets.x,
-            widthScreen * 256,
+            widthScreen * 210,
             "Lấy thêm vé",
             {
-              fontSize: `${smFontSize * 2}rem`,
+              fontSize: `${smFontSize * 28.8}px`,
             }
           );
 
@@ -233,22 +257,22 @@ const ChessBoardUI = () => {
           const diamondCountYellow = this.add.image(0, 0, "diamondYellow");
           diamondCountYellow.setPosition(
             widthScreen * 620,
-            (widthScreen * 737) / 3
+            (widthScreen * 580) / 3
           );
           diamondCountYellow.setDisplaySize(widthScreen * 49, widthScreen * 47);
           diamondCountYellow.setDepth(2);
           const borderDiamond = this.add.image(
             widthScreen * 663.4,
-            (widthScreen * 737) / 3,
+            (widthScreen * 580) / 3,
             "borderDiamond"
           );
           borderDiamond.setDisplaySize(widthScreen * 180, widthScreen * 77);
           remainDiamonds = this.add.text(
-            widthScreen * 670,
-            widthScreen * 243.21,
-            `${countDiamondsSide}`,
+            widthScreen * 660,
+            widthScreen * 190,
+            `${countDiamondsSide != undefined ? countDiamondsSide : 0}`,
             {
-              fontSize: `${smFontSize * 2.3}rem`,
+              fontSize: `${smFontSize * 36.8}px`,
               align: "center",
               stroke: "#fff",
               strokeThickness: widthScreen * 2,
@@ -260,10 +284,10 @@ const ChessBoardUI = () => {
           // CONTENT MENU ITEMS
           const labelWareHouseItems = this.add.text(
             widthScreen * 220,
-            widthScreen * 356.22,
+            widthScreen * 306,
             "Kho vật phẩm hỗ trợ",
             {
-              fontSize: `${smFontSize * 2.2}rem`,
+              fontSize: `${smFontSize * 35.2}px`,
             }
           );
           containerItems = this.add.container();
@@ -283,12 +307,12 @@ const ChessBoardUI = () => {
           // Block
           const blockBg = this.add.image(chessboard.x, chessboard.y, "blockBg");
           blockBg.alpha = 0.3;
-          blockBg.setDisplaySize(widthScreen * 767, widthScreen * 536);
+          blockBg.setDisplaySize(widthScreen * 780, widthScreen * 536);
 
           // Roll Dice
           const rollDiceBtn = this.add.image(
             widthScreen * 1365,
-            widthScreen * 1005,
+            widthScreen * 915,
             "rollDice"
           );
           rollDiceBtn.setDisplaySize(widthScreen * 413, widthScreen * 225);
@@ -348,8 +372,8 @@ const ChessBoardUI = () => {
           knifeLeft = this.add.image(0, 0, "knifeLeft");
           knifeRight = this.add.image(0, 0, "knifeRight");
 
-          knifeLeft.setPosition(widthScreen * 1075, widthScreen * 1005);
-          knifeRight.setPosition(widthScreen * 1655, widthScreen * 1005);
+          knifeLeft.setPosition(widthScreen * 1075, widthScreen * 915);
+          knifeRight.setPosition(widthScreen * 1655, widthScreen * 915);
 
           knifeLeft.setDisplaySize(widthScreen * 320, widthScreen * 103);
           knifeRight.setDisplaySize(widthScreen * 320, widthScreen * 103);
@@ -359,7 +383,9 @@ const ChessBoardUI = () => {
         },
         update() {
           countTicketsSide = ItemBase.countTickets;
-          remainTickets.setText(`${countTicketsSide} vé`);
+          remainTickets.setText(
+            `${countTicketsSide != undefined ? countTicketsSide : 0} vé`
+          );
 
           //update list Items
           listItems = ItemBase.listItems;
@@ -383,10 +409,11 @@ const ChessBoardUI = () => {
               const itemCreate = createItem(
                 this,
                 widthScreen * 215.6,
-                widthScreen * 465 * value,
-                item.imageKey,
-                item.detail,
-                item.type,
+                widthScreen * 430 * value,
+                item?.item_image,
+                item?.item_name,
+                item?.sub_type,
+                item?.quantity_available,
                 chessboard,
                 player,
                 dice_1,
@@ -401,7 +428,9 @@ const ChessBoardUI = () => {
 
           // update diamonds
           countDiamondsSide = ItemBase.countDiamonds;
-          remainDiamonds?.setText(`${countDiamondsSide}`);
+          remainDiamonds?.setText(
+            `${countDiamondsSide != undefined ? countDiamondsSide : 0}`
+          );
 
           // update content alert action
           contentAlertAction = ItemBase.contentAlertAction;
@@ -422,7 +451,7 @@ const ChessBoardUI = () => {
             : imgItemAlert.setVisible(true);
           imgItemAlert?.setTexture(imgKeyItem);
           imgItemAlert?.setDisplaySize(widthScreen * 60, widthScreen * 60);
-          imgItemAlert.setPosition(widthScreen * 1248.9, widthScreen * 56);
+          imgItemAlert.setPosition(widthScreen * 1680, widthScreen * 46);
 
           // update text select dice
           textSelectDice = ItemBase.textSelectDice;

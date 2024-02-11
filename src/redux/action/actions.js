@@ -20,3 +20,13 @@ export const decreaseDiamonds = (countDiamonds) => ({
   type: Constants.DECREASE_DIAMONDS,
   payload: countDiamonds,
 });
+
+export const setDetailPlatform = (detail) => ({
+  type: Constants.SET_DETAIL_PLATFORM,
+  payload: detail,
+});
+
+export const setDetailDiamond = (diamond) => ({
+  type: Constants.SET_DETAIL_DIAMONDS,
+  payload: diamond,
+});

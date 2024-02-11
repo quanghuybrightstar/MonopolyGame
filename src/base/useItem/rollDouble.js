@@ -4,6 +4,8 @@ import { movePlayerWithSteps } from "../player/player";
 import ItemBase from "../../storage/Items";
 import { tweenAnims } from "../animation/tweenAnims";
 import SmartBaseScreen from "../SmartScreenBase";
+import updateQuantityItem from "../UpdateQuantityItem";
+
 SmartBaseScreen.baseSetUp();
 const widthScreen = SmartBaseScreen.smBaseWidth;
 
@@ -15,6 +17,15 @@ export const rollDouble = (
   _dice2,
   _steps
 ) => {
+  const platformSelected = ItemBase.platformSelected;
+  const detailItemTicket = ItemBase.detailItem.filter(
+    (item) => item.item_category == "ticket"
+  );
+
+  const item_result = ItemBase.detailItem.filter(
+    (item) => item.item_category != "ticket"
+  );
+  
   let isRolling = false;
   _dice1.setVisible(true);
   _dice2.setVisible(true);
@@ -56,6 +67,19 @@ export const rollDouble = (
     }, 2000);
 
     ItemBase.decreaseCountTickets(1);
+    detailItemTicket[0] = {
+      ...detailItemTicket[0],
+      quantity_available: ItemBase.countTickets - 1,
+    };
+    item_result.push(detailItemTicket[0]);
+    ItemBase.updateDetailItem(item_result);
+    const body = {
+      platform_id: platformSelected.id,
+      platform_category: platformSelected.type,
+      item_result: JSON.stringify(item_result),
+      type: "playing",
+    };
+    const result = updateQuantityItem(body);
   }
   _this.input.enabled = false;
   setTimeout(() => {

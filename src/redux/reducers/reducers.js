@@ -3,8 +3,10 @@ import Constants from "../constants/constants";
 import { combineReducers } from "redux";
 
 const initState = {
-  countTickets: 10,
-  countDiamonds: 1000,
+  countTickets: null,
+  countDiamonds: null,
+  detailPlatform: null,
+  quantity_diamond: null,
 };
 
 const rootReducer = (state = initState, action) => {
@@ -17,6 +19,10 @@ const rootReducer = (state = initState, action) => {
       return { ...state, countDiamonds: state.countDiamonds + action.payload };
     case Constants.DECREASE_DIAMONDS:
       return { ...state, countDiamonds: state.countDiamonds - action.payload };
+    case Constants.SET_DETAIL_PLATFORM:
+      return { ...state, detailPlatform: action.payload };
+    case Constants.SET_DETAIL_DIAMONDS:
+      return { ...state, quantity_diamond: action.payload };
     default:
       return state;
   }

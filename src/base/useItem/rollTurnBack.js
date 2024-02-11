@@ -5,13 +5,22 @@ import { TypeItem } from "../../constants/Items/typeItem";
 import { Constants } from "../../constants/Constants";
 import { checkDirection } from "../player/checkDirection";
 import SmartBaseScreen from "../SmartScreenBase";
+import updateQuantityItem from "../UpdateQuantityItem";
+
 SmartBaseScreen.baseSetUp();
 const widthScreen = SmartBaseScreen.smBaseWidth;
 const smFontSize = SmartBaseScreen.smFontSize;
 
 export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
   let isRolling = false;
+  const platformSelected = ItemBase.platformSelected;
+  const detailItemTicket = ItemBase.detailItem.filter(
+    (item) => item.item_category == "ticket"
+  );
 
+  const item_result = ItemBase.detailItem.filter(
+    (item) => item.item_category != "ticket"
+  );
   _dice.setVisible(true);
   _dice.setPosition((_chessboard.x * 2) / 3, widthScreen * 530);
   if (!isRolling) {
@@ -28,6 +37,19 @@ export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
     }, 2000);
 
     ItemBase.decreaseCountTickets(1);
+    detailItemTicket[0] = {
+      ...detailItemTicket[0],
+      quantity_available: ItemBase.countTickets - 1,
+    };
+    item_result.push(detailItemTicket[0]);
+    ItemBase.updateDetailItem(item_result);
+    const body = {
+      platform_id: platformSelected.id,
+      platform_category: platformSelected.type,
+      item_result: JSON.stringify(item_result),
+      type: "playing",
+    };
+    const result = updateQuantityItem(body);
   }
 
   _this.input.enabled = false;
@@ -74,12 +96,12 @@ export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
           const newX =
             0 * Constants.rectangleWidth +
             widthScreen *
-              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760);
 
           const newY =
             5 * Constants.rectangleHeight +
             widthScreen *
-              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 25);
 
           _player.setPosition(newX, newY);
           ItemBase.updateContentAlertAction(
@@ -95,12 +117,12 @@ export const rollTurnBack = (_this, _chessboard, _player, _dice, _steps) => {
           const newX =
             prevPosition.col * Constants.rectangleWidth +
             widthScreen *
-              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 790);
+              ((Constants.rectangleWidth * 3) / 2 / widthScreen + 760);
 
           const newY =
             prevPosition.row * Constants.rectangleHeight +
             widthScreen *
-              ((Constants.rectangleHeight * 1.52) / widthScreen + 105);
+              ((Constants.rectangleHeight * 1.52) / widthScreen + 25);
 
           _player.setPosition(newX, newY);
         }

@@ -13,7 +13,7 @@ export const getItemBoxText = (_this, _chessboard, _imageKey, _detailItem) => {
     containerText.y * 0.9,
     "Chúc mừng! Bạn đã nhận một vật phẩm.",
     {
-      fontSize: `${smFontSize * 2.2}rem `,
+      fontSize: `${smFontSize * 35.2}px `,
       stroke: "#fff",
       strokeThickness: widthScreen * 3,
       shadow: {
@@ -47,7 +47,7 @@ export const getItemBoxText = (_this, _chessboard, _imageKey, _detailItem) => {
     containerText.y * 1.8,
     _detailItem,
     {
-      fontSize: `${smFontSize * 2.1}rem `,
+      fontSize: `${smFontSize * 33.6}px `,
       color: "#ffb366",
       stroke: "#ffb366",
       strokeThickness: 2,

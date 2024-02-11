@@ -5,6 +5,7 @@ import ItemBase from "../../storage/Items";
 import { turn1Cell } from "../useItem";
 import { deleteItem } from "./deleteItem";
 import SmartBaseScreen from "../SmartScreenBase";
+import API from "../../apis/APIConstants";
 SmartBaseScreen.baseSetUp();
 const widthScreen = SmartBaseScreen.smBaseWidth;
 const smFontSize = SmartBaseScreen.smFontSize;
@@ -16,12 +17,13 @@ export const createItem = (
   _keyImage,
   _itemDetail,
   _type,
+  _count,
   _chessboard,
   _player,
   _dice1,
   _dice2
 ) => {
-  const borderItem = _this.add.image(
+  const borderItem = _this?.add?.image(
     _containerX * 2.08,
     _containerY * 0.96,
     "borderItem"
@@ -31,7 +33,7 @@ export const createItem = (
   const imageItem = _this.add.image(
     _containerX * 0.92,
     _containerY * 0.96,
-    _keyImage
+    _type
   );
   imageItem.setDisplaySize(widthScreen * 48, widthScreen * 44);
 
@@ -40,18 +42,18 @@ export const createItem = (
     _containerY * 0.96,
     `X${ItemBase.getCountItem(_type)}`,
     {
-      fontSize: `${smFontSize * 1.6}rem `,
+      fontSize: `${smFontSize * 25.6}px `,
       color: "#ffb366",
     }
   );
   remainItemText.setOrigin(0, 0.5);
 
   let itemDetail = _this.add.text(
-    _containerX * 1.45,
+    _containerX * 1.6,
     _containerY * 0.95,
     _itemDetail,
     {
-      fontSize: `${smFontSize * 1.3}rem `,
+      fontSize: `${smFontSize * 20.8}px `,
       maxLines: 2,
       wordWrap: {
         width: widthScreen * 250,
@@ -89,7 +91,7 @@ export const createItem = (
         ItemBase.updateContentAlertAction("Bạn đã sử dụng vật phẩm ");
         switch (_type) {
           case TypeItem.ROLL_DOUBLE:
-            ItemBase.updateImgKeyItem("rollDoubleItemBg");
+            ItemBase.updateImgKeyItem(TypeItem.ROLL_DOUBLE + "_bg");
             ItemBase.updateItem(_type, -1);
             ItemBase.updateIsUsingItem(true);
             deleteItem(ItemBase.listItems, _type);
@@ -98,13 +100,13 @@ export const createItem = (
             turn1Cell(_this, _chessboard, _player, _dice1, _dice2);
             break;
           case TypeItem.X2_DIAMOND:
-            ItemBase.updateImgKeyItem("x2DiamondItemBg");
+            ItemBase.updateImgKeyItem(TypeItem.X2_DIAMOND + "_bg");
             ItemBase.updateItem(_type, -1);
             ItemBase.updateIsUsingItem(true);
             deleteItem(ItemBase.listItems, _type);
             break;
           case TypeItem.ROLL_DOUBLE_SELECT_1:
-            ItemBase.updateImgKeyItem("rollDoubleSelect1ItemBg");
+            ItemBase.updateImgKeyItem(TypeItem.ROLL_DOUBLE_SELECT_1 + "_bg");
             ItemBase.updateItem(_type, -1);
             ItemBase.updateIsUsingItem(true);
             deleteItem(ItemBase.listItems, _type);
@@ -128,7 +130,7 @@ export const createItem = (
               ItemBase.updateIsBtnSelected(false);
             } else {
               ItemBase.updateTypeUsingItem(_type);
-              ItemBase.updateImgKeyItem("rollTurnBackItemBg");
+              ItemBase.updateImgKeyItem(TypeItem.ROLL_TURN_BACK + "_bg");
               ItemBase.updateItem(_type, -1);
               ItemBase.updateIsUsingItem(true);
               deleteItem(ItemBase.listItems, _type);
